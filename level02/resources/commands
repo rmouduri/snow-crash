@@ -1,0 +1,43 @@
+level02@SnowCrash:~$ ls -la
+total 24
+dr-x------ 1 level02 level02  120 Mar  5  2016 .
+d--x--x--x 1 root    users    340 Aug 30  2015 ..
+-r-x------ 1 level02 level02  220 Apr  3  2012 .bash_logout
+-r-x------ 1 level02 level02 3518 Aug 30  2015 .bashrc
+-r-x------ 1 level02 level02  675 Apr  3  2012 .profile
+----r--r-- 1 flag02  level02 8302 Aug 30  2015 level02.pcap
+
+On va recuperer level02.pcap et l'ouvrir dans Wireshark
+
+scp -P 4242 level02@192.168.150.129:/home/user/level02/level02.pcap .
+
+On filtre pour avoir uniquement les packets qui ont du texte (data.text), on trouve des packets qui a la suite donnent:
+f
+t
+_
+w
+a
+n
+d
+r
+\177
+\177
+\177
+N
+D
+R
+e
+l
+\177
+L
+0
+L
+
+
+Les \177 sont 7f en hexadecimal qui correspondent a DEL, chaque \177 supprime le dernier char ecrit en haut, en les supprimant on a ft_waNDReL0L
+
+level02@SnowCrash:~$ su flag02
+Password: ft_waNDReL0L
+Don't forget to launch getflag !
+flag02@SnowCrash:~$ getflag 
+Check flag.Here is your token : kooda2puivaav1idi4f57q8iq

